@@ -1,9 +1,12 @@
 @echo off
 setlocal DisableDelayedExpansion
 set "PACKAGE_NAME=AP-Research-v1.0.1"
+set "PACKAGE_TAG=v1.0.1"
+set "PACKAGE_SHA256=4C7E2EBA01D1C98C8BEF7D4ABB71D309B34876D9340824936F634215632AA1F4"
 set "AP_INSTALLER_FILE=%~f0"
-set "AP_INSTALLER_DIR=%~dp0"
 set "AP_PACKAGE_NAME=%PACKAGE_NAME%"
+set "AP_PACKAGE_URL=https://github.com/aryiel1905/AP-Research/releases/download/%PACKAGE_TAG%/%PACKAGE_NAME%.zip"
+set "AP_PACKAGE_SHA256=%PACKAGE_SHA256%"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { $lines=[IO.File]::ReadAllLines($env:AP_INSTALLER_FILE); $code=($lines | Where-Object { $_.StartsWith('::PS ') } | ForEach-Object { $_.Substring(5) }) -join [Environment]::NewLine; & ([ScriptBlock]::Create($code)) } catch { Write-Host ('[ERROR] ' + $_.Exception.Message) -ForegroundColor Red; exit 1 }"
 set "AP_EXIT_CODE=%ERRORLEVEL%"
 if not "%AP_EXIT_CODE%"=="0" pause
@@ -11,7 +14,8 @@ exit /b %AP_EXIT_CODE%
 
 ::PS $ErrorActionPreference = 'Stop'
 ::PS $packageName = $env:AP_PACKAGE_NAME
-::PS $installerDir = [IO.Path]::GetFullPath($env:AP_INSTALLER_DIR)
+::PS $packageUrl = $env:AP_PACKAGE_URL
+::PS $packageSha256 = $env:AP_PACKAGE_SHA256
 ::PS if ([string]::IsNullOrWhiteSpace($env:LOCALAPPDATA)) { throw 'LOCALAPPDATA is unavailable.' }
 ::PS $installBase = [IO.Path]::GetFullPath((Join-Path $env:LOCALAPPDATA 'AP-Research'))
 ::PS $extensionDir = [IO.Path]::GetFullPath((Join-Path $installBase 'Extension'))
@@ -42,16 +46,29 @@ exit /b %AP_EXIT_CODE%
 ::PS     if (-not $target.StartsWith($rootWithSlash, [StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath $target -PathType Leaf)) { Fail ('Required extension file is missing or outside the extension: ' + $reference) }
 ::PS   }
 ::PS }
-::PS function FindSource {
-::PS   $folder = Join-Path $installerDir $packageName
-::PS   $zip = Join-Path $installerDir ($packageName + '.zip')
-::PS   if (Test-Path -LiteralPath $folder -PathType Container) { Write-Host ('[OK] ' + $packageName + ' folder found'); return @{ Path = $folder; Temporary = $null } }
-::PS   if (-not (Test-Path -LiteralPath $zip -PathType Leaf)) { Fail ($packageName + ' folder or ZIP was not found beside this BAT file.') }
-::PS   Write-Host ('[OK] ' + $packageName + ' ZIP found')
+::PS function NewInstallerTemp {
 ::PS   $tempParent = Join-Path $env:TEMP 'AP-Research-Installer'
 ::PS   $temp = Join-Path $tempParent ([guid]::NewGuid().ToString('N'))
-::PS   try { New-Item -ItemType Directory -Path $temp -Force -ErrorAction Stop | Out-Null; Expand-Archive -LiteralPath $zip -DestinationPath $temp -ErrorAction Stop } catch { if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue }; Fail ('ZIP extraction failed: ' + $_.Exception.Message) }
-::PS   return @{ Path = $temp; Temporary = $temp }
+::PS   try { New-Item -ItemType Directory -Path $temp -Force -ErrorAction Stop | Out-Null } catch { Fail ('Could not create the temporary folder: ' + $_.Exception.Message) }
+::PS   return $temp
+::PS }
+::PS function ExpandSourceZip([string]$zip, [string]$temp) {
+::PS   $extracted = Join-Path $temp 'extracted'
+::PS   try { Expand-Archive -LiteralPath $zip -DestinationPath $extracted -ErrorAction Stop } catch { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue; Fail ('ZIP extraction failed: ' + $_.Exception.Message) }
+::PS   return @{ Path = $extracted; Temporary = $temp }
+::PS }
+::PS function DownloadSource {
+::PS   $temp = NewInstallerTemp
+::PS   $download = Join-Path $temp ($packageName + '.zip')
+::PS   Write-Host ('[INFO] Downloading ' + $packageName + ' from the GitHub release...')
+::PS   try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri $packageUrl -OutFile $download -UseBasicParsing -TimeoutSec 120 -ErrorAction Stop | Out-Null } catch { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue; Fail ('GitHub download failed. Check the connection or use a local package. ' + $_.Exception.Message) }
+::PS   try { $actualHash = (Get-FileHash -LiteralPath $download -Algorithm SHA256 -ErrorAction Stop).Hash } catch { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue; Fail ('Could not verify the downloaded ZIP: ' + $_.Exception.Message) }
+::PS   if ($actualHash -ine $packageSha256) { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue; Fail 'The downloaded ZIP did not match the expected SHA-256 fingerprint. Nothing was installed.' }
+::PS   Write-Host '[OK] GitHub package downloaded and verified'
+::PS   return (ExpandSourceZip $download $temp)
+::PS }
+::PS function FindSource {
+::PS   return (DownloadSource)
 ::PS }
 ::PS function FindExtension([string]$source) {
 ::PS   try { $manifests = @(Get-ChildItem -LiteralPath $source -Filter 'manifest.json' -File -Recurse -Force -ErrorAction Stop) } catch { Fail ('Source folder is inaccessible: ' + $_.Exception.Message) }
@@ -216,7 +233,7 @@ exit /b %AP_EXIT_CODE%
 ::PS     Write-Host '========================================'
 ::PS     Write-Host '          AP RESEARCH INSTALLER'
 ::PS     Write-Host '========================================'
-::PS     Write-Host ('Source: ' + $packageName)
+::PS     Write-Host ('Source: GitHub release ' + $packageName)
 ::PS     Write-Host ''
 ::PS     Write-Host 'Detected browsers:'
 ::PS     Write-Host ('Google Chrome : ' + $chromeStatus)

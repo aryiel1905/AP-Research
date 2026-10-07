@@ -1,10 +1,10 @@
 # AP Research Windows installer
 
-Keep `Install_AP_Research.bat` beside either `AP-Research-v1.0.1.zip` or the `AP-Research-v1.0.1` folder. If both are present, the folder is used. The extension is copied to `%LOCALAPPDATA%\AP-Research\Extension`; no administrator access or extra tools are needed.
+`Install_AP_Research.bat` downloads AP Research v1.0.1 from the [public GitHub release](https://github.com/aryiel1905/AP-Research/releases/tag/v1.0.1). It does not use a local extension folder or ZIP. The downloaded ZIP is checked against its expected SHA-256 fingerprint, then the extension is installed at `%LOCALAPPDATA%\AP-Research\Extension`. An internet connection is required for installation; no administrator access or extra tools are needed.
 
 ## Install
 
-1. Double-click `Install_AP_Research.bat`. The menu shows profiles found in Chrome and Brave's standard user-data folders. Choose the browser you want.
+1. Download the BAT from the GitHub release and double-click it. The menu shows profiles found in Chrome and Brave's standard user-data folders. Choose the browser you want.
 2. If prompted, close all windows of that browser and press Enter.
 3. The installer creates `Chrome - AP Research.lnk` or `Brave - AP Research.lnk` on your Desktop and opens the browser Extensions page.
 4. Check the browser's profile icon to confirm the intended profile is open. The list in the installer is informational; the shortcut does not select a profile.
@@ -15,7 +15,7 @@ Use the generated AP Research browser shortcut for later launches. If the AP Res
 
 ## Update
 
-Replace the supplied package with a newer AP Research package, change `PACKAGE_NAME` near the top of the BAT file to that package's name, and run the installer again. It stages the new files and restores the previous extension if replacement fails. Reload AP Research on the browser Extensions page after an update.
+Running the same BAT again downloads v1.0.1 and replaces the existing AP Research files. For a future version, download the BAT from that version's release; its package name, release URL, and expected SHA-256 fingerprint must match. The installer stages new files and restores the previous extension if replacement fails. Reload AP Research on the browser Extensions page after an update.
 
 ## Uninstall
 
