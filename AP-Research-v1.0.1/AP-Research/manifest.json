@@ -1,0 +1,123 @@
+{
+  "manifest_version": 3,
+  "name": "AP Research",
+  "version": "1.0.1",
+  "description": "Open five Australian area research sources and use focused in-page data and chart tools.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "clipboardWrite",
+    "storage",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://sqmresearch.com.au/*",
+    "https://www.sqmresearch.com.au/*",
+    "https://propertyvalue.com.au/*",
+    "https://www.propertyvalue.com.au/*",
+    "https://www.realestate.com.au/*",
+    "https://abs.gov.au/*",
+    "https://www.abs.gov.au/*",
+    "https://yourinvestmentpropertymag.com.au/*",
+    "https://www.yourinvestmentpropertymag.com.au/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "AP Research",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://abs.gov.au/census/find-census-data/quickstats/2021/SAL*",
+        "https://www.abs.gov.au/census/find-census-data/quickstats/2021/SAL*"
+      ],
+      "css": [
+        "abs-panel.css"
+      ],
+      "js": [
+        "vendor/gsap.min.js",
+        "vendor/ScrollTrigger.min.js",
+        "abs-content.js",
+        "panel-motion.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://sqmresearch.com.au/*",
+        "https://www.sqmresearch.com.au/*"
+      ],
+      "css": [
+        "sqm-panel.css"
+      ],
+      "js": [
+        "vendor/gsap.min.js",
+        "vendor/ScrollTrigger.min.js",
+        "sqm-content.js",
+        "panel-motion.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://propertyvalue.com.au/suburb/*",
+        "https://www.propertyvalue.com.au/suburb/*"
+      ],
+      "css": [
+        "propertyvalue-panel.css"
+      ],
+      "js": [
+        "vendor/gsap.min.js",
+        "vendor/ScrollTrigger.min.js",
+        "propertyvalue-content.js",
+        "panel-motion.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.realestate.com.au/*"
+      ],
+      "css": [
+        "rea-panel.css"
+      ],
+      "js": [
+        "vendor/gsap.min.js",
+        "vendor/ScrollTrigger.min.js",
+        "rea-content.js",
+        "panel-motion.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://yourinvestmentpropertymag.com.au/top-suburbs/*",
+        "https://www.yourinvestmentpropertymag.com.au/top-suburbs/*"
+      ],
+      "js": [
+        "vendor/gsap.min.js",
+        "vendor/ScrollTrigger.min.js",
+        "yip-content.js",
+        "panel-motion.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

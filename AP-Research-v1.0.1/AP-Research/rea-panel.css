@@ -1,0 +1,151 @@
+#apr-rea-panel,
+#apr-rea-panel * { box-sizing: border-box; }
+
+#apr-rea-panel {
+  --aph-bg: #101010;
+  --aph-ink: #f5f5f5;
+  --aph-muted: #a8a8a8;
+  --aph-accent: #4b4b4b;
+  --aph-gold: #d8d8d8;
+  --aph-line: rgba(245,245,245,.11);
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 2147483647;
+  width: min(402px, 94vw);
+  height: 100dvh;
+  overflow: hidden;
+  color: var(--aph-ink);
+  font: 13px/1.4 Outfit, "Segoe UI", system-ui, -apple-system, sans-serif;
+  transition: width 520ms cubic-bezier(.22,1,.36,1);
+}
+
+#apr-rea-panel button { font: inherit; }
+#apr-rea-panel button:focus-visible { outline: 2px solid var(--aph-gold); outline-offset: 3px; }
+
+#apr-rea-panel .rea-panel-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-left: 1px solid var(--aph-line);
+  background:
+    radial-gradient(circle at 88% 5%, rgba(75,75,75,.28), transparent 34%),
+    radial-gradient(circle at 4% 62%, rgba(27,27,27,.28), transparent 40%),
+    var(--aph-bg);
+  box-shadow: -24px 0 72px rgba(16,16,16,.35);
+}
+
+#apr-rea-panel .rea-panel-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.33'/%3E%3C/svg%3E");
+}
+
+#apr-rea-panel .rea-header {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 39px minmax(0,1fr) 35px;
+  align-items: center;
+  gap: 11px;
+  min-height: 72px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--aph-line);
+  background: rgba(16,16,16,.82);
+  backdrop-filter: blur(18px);
+}
+
+#apr-rea-panel .rea-brand-mark {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(245,245,245,.18);
+  border-radius: 50%;
+  background: var(--aph-ink);
+  color: var(--aph-bg);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: -.04em;
+}
+
+#apr-rea-panel .rea-title-wrap { min-width: 0; }
+#apr-rea-panel .rea-title { font-size: 13px; font-weight: 780; letter-spacing: -.015em; }
+#apr-rea-panel .rea-subtitle { margin-top: 3px; overflow: hidden; color: var(--aph-muted); font-size: 9px; letter-spacing: .05em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+
+#apr-rea-panel .rea-collapse-btn,
+#apr-rea-panel .rea-copy-btn {
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+#apr-rea-panel .rea-collapse-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transition: transform 260ms ease, background 220ms ease, border-color 220ms ease;
+}
+
+#apr-rea-panel .rea-collapse-btn:hover { transform: scale(1.06); border-color: var(--aph-line); background: rgba(245,245,245,.07); }
+#apr-rea-panel .rea-collapse-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#apr-rea-panel .rea-rail-label { display: none; }
+
+#apr-rea-panel .rea-marquee { position: relative; z-index: 2; overflow: hidden; border-bottom: 1px solid rgba(245,245,245,.08); white-space: nowrap; }
+#apr-rea-panel .rea-marquee > div { width: max-content; display: flex; align-items: center; gap: 16px; padding: 8px 0; color: #a8a8a8; font-size: 9px; font-weight: 650; letter-spacing: .05em; text-transform: uppercase; animation: rea-marquee 22s linear infinite; }
+#apr-rea-panel .rea-marquee i { width: 4px; height: 4px; border-radius: 50%; background: var(--aph-accent); }
+@keyframes rea-marquee { to { transform: translateX(-50%); } }
+
+#apr-rea-panel .rea-body { position: relative; z-index: 1; min-height: 0; flex: 1; overflow-x: hidden; overflow-y: auto; padding: 20px 20px 24px; scrollbar-width: thin; scrollbar-color: rgba(245,245,245,.18) transparent; }
+
+#apr-rea-panel .rea-section-heading { margin: 0 2px 14px; }
+#apr-rea-panel .rea-section-heading .rea-source-label { display: block; margin: 0 0 5px; color: #d8d8d8 !important; font: 800 9px/1.2 Outfit, "Segoe UI", system-ui, sans-serif !important; letter-spacing: .1em; text-transform: uppercase; white-space: normal; }
+#apr-rea-panel .rea-section-heading h2 { margin: 0; color: #f5f5f5 !important; font: 760 20px/1.1 Outfit, "Segoe UI", system-ui, sans-serif !important; letter-spacing: -.035em; text-transform: none; }
+
+#apr-rea-panel .rea-table { width: 100%; overflow: hidden; border: 1px solid var(--aph-line); border-collapse: separate; border-spacing: 0; border-radius: 16px; background: #1a1a1a; table-layout: fixed; }
+#apr-rea-panel .rea-col-bed { width: 24%; }
+#apr-rea-panel .rea-col-buy { width: 43%; }
+#apr-rea-panel .rea-col-rent { width: 33%; }
+#apr-rea-panel .rea-table th, #apr-rea-panel .rea-table td { min-width: 0; border-bottom: 1px solid rgba(245,245,245,.09); line-height: 1.2; vertical-align: middle; }
+#apr-rea-panel .rea-table tbody tr:last-child th, #apr-rea-panel .rea-table tbody tr:last-child td { border-bottom: 0; }
+#apr-rea-panel .rea-table-head { background: #262626; }
+#apr-rea-panel .rea-table-head th { height: 38px; padding: 0 12px; color: #c4c4c4; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-align: left; text-transform: uppercase; }
+#apr-rea-panel .rea-table-head th:nth-child(n+2) { padding-right: 36px; text-align: right; }
+#apr-rea-panel .rea-period-row { background: #303030; }
+#apr-rea-panel .rea-period-row td { padding: 7px 12px; }
+#apr-rea-panel .rea-period-content { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 28px; color: #e4e4e4; font-size: 10px; font-weight: 700; }
+#apr-rea-panel .rea-copy-month { min-height: 28px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: none; padding: 0 9px; border: 1px solid rgba(245,245,245,.2); border-radius: 999px; background: rgba(245,245,245,.05); color: #f5f5f5; cursor: pointer; font-size: 9px; font-weight: 760; transition: background 220ms ease, border-color 220ms ease; }
+#apr-rea-panel .rea-copy-month:hover { border-color: #b8b8b8; background: rgba(245,245,245,.1); }
+#apr-rea-panel .rea-copy-month svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#apr-rea-panel .rea-row { transition: background 240ms ease; }
+#apr-rea-panel .rea-row:hover { background: rgba(245,245,245,.075); }
+#apr-rea-panel .rea-row th, #apr-rea-panel .rea-row td { height: 54px; padding: 7px 8px; }
+#apr-rea-panel .rea-row th:first-child { padding-left: 12px; }
+#apr-rea-panel .rea-bed { color: #c4c4c4; font-size: 10px; font-weight: 720; text-align: left; }
+#apr-rea-panel .rea-value-cell { min-width: 0; display: grid; grid-template-columns: minmax(0,1fr) 24px; align-items: center; gap: 4px; font-size: 12px; font-weight: 780; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#apr-rea-panel .rea-value-cell > span:first-child { overflow: hidden; text-align: right; text-overflow: clip; }
+#apr-rea-panel .rea-copy-btn, #apr-rea-panel .rea-copy-spacer { width: 24px; height: 24px; border-radius: 50%; color: #b8b8b8; }
+#apr-rea-panel .rea-copy-btn:hover { color: #f5f5f5; background: rgba(245,245,245,.08); }
+#apr-rea-panel .rea-copy-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#apr-rea-panel .rea-copy-success { color: #f5f5f5 !important; }
+
+#apr-rea-panel.rea-collapsed { width: 62px; }
+#apr-rea-panel.rea-collapsed .rea-header { width: 62px; height: 100%; display: flex; flex-direction: column; padding: 15px 10px 20px; border-bottom: 0; }
+#apr-rea-panel.rea-collapsed .rea-title-wrap,
+#apr-rea-panel.rea-collapsed .rea-marquee,
+#apr-rea-panel.rea-collapsed .rea-body { display: none; }
+#apr-rea-panel.rea-collapsed .rea-collapse-btn { order: -1; transform: rotate(180deg); }
+#apr-rea-panel.rea-collapsed .rea-brand-mark { margin-top: auto; }
+#apr-rea-panel.rea-collapsed .rea-rail-label { display: block; margin: auto 0; writing-mode: vertical-rl; transform: rotate(180deg); color: #d8d8d8; font-size: 9px; font-weight: 720; letter-spacing: .12em; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: reduce) {
+  #apr-rea-panel *, #apr-rea-panel *::before, #apr-rea-panel *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

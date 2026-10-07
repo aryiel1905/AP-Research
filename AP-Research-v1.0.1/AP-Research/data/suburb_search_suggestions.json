@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "last_updated": "2026-09-18",
+  "purpose": "Autocomplete/search suggestions based on suburbs and postcodes previously searched.",
+  "unique_key": "suburb|state|postcode",
+  "suggestions": [
+    {
+      "suburb": "Adamstown",
+      "state": "NSW",
+      "postcode": "2289",
+      "label": "Adamstown, NSW 2289",
+      "searchText": "adamstown nsw 2289"
+    },
+    {
+      "suburb": "Beenleigh",
+      "state": "QLD",
+      "postcode": "4207",
+      "label": "Beenleigh, QLD 4207",
+      "searchText": "beenleigh qld 4207"
+    },
+    {
+      "suburb": "Bellbird",
+      "state": "NSW",
+      "postcode": "2325",
+      "label": "Bellbird, NSW 2325",
+      "searchText": "bellbird nsw 2325"
+    },
+    {
+      "suburb": "Bellbird Park",
+      "state": "QLD",
+      "postcode": "4300",
+      "label": "Bellbird Park, QLD 4300",
+      "searchText": "bellbird park qld 4300"
+    },
+    {
+      "suburb": "Bohle Plains",
+      "state": "QLD",
+      "postcode": "4817",
+      "label": "Bohle Plains, QLD 4817",
+      "searchText": "bohle plains qld 4817"
+    },
+    {
+      "suburb": "Booval",
+      "state": "QLD",
+      "postcode": "4304",
+      "label": "Booval, QLD 4304",
+      "searchText": "booval qld 4304"
+    },
+    {
+      "suburb": "Bundaberg",
+      "state": "QLD",
+      "postcode": "4670",
+      "label": "Bundaberg, QLD 4670",
+      "searchText": "bundaberg qld 4670"
+    },
+    {
+      "suburb": "Bundaberg South",
+      "state": "QLD",
+      "postcode": "4670",
+      "label": "Bundaberg South, QLD 4670",
+      "searchText": "bundaberg south qld 4670"
+    },
+    {
+      "suburb": "Burpengary",
+      "state": "QLD",
+      "postcode": "4505",
+      "label": "Burpengary, QLD 4505",
+      "searchText": "burpengary qld 4505"
+    },
+    {
+      "suburb": "Caboolture",
+      "state": "QLD",
+      "postcode": "4510",
+      "label": "Caboolture, QLD 4510",
+      "searchText": "caboolture qld 4510"
+    },
+    {
+      "suburb": "Cessnock",
+      "state": "NSW",
+      "postcode": "2325",
+      "label": "Cessnock, NSW 2325",
+      "searchText": "cessnock nsw 2325"
+    },
+    {
+      "suburb": "Erina",
+      "state": "NSW",
+      "postcode": "2250",
+      "label": "Erina, NSW 2250",
+      "searchText": "erina nsw 2250"
+    },
+    {
+      "suburb": "Goodna",
+      "state": "QLD",
+      "postcode": "4300",
+      "label": "Goodna, QLD 4300",
+      "searchText": "goodna qld 4300"
+    },
+    {
+      "suburb": "Granville",
+      "state": "QLD",
+      "postcode": "4650",
+      "label": "Granville, QLD 4650",
+      "searchText": "granville qld 4650"
+    },
+    {
+      "suburb": "Hervey Bay",
+      "state": "QLD",
+      "postcode": "4655",
+      "label": "Hervey Bay, QLD 4655",
+      "searchText": "hervey bay qld 4655"
+    },
+    {
+      "suburb": "Ipswich",
+      "state": "QLD",
+      "postcode": "4305",
+      "label": "Ipswich, QLD 4305",
+      "searchText": "ipswich qld 4305"
+    },
+    {
+      "suburb": "Narangba",
+      "state": "QLD",
+      "postcode": "4504",
+      "label": "Narangba, QLD 4504",
+      "searchText": "narangba qld 4504"
+    },
+    {
+      "suburb": "New Lambton",
+      "state": "NSW",
+      "postcode": "2305",
+      "label": "New Lambton, NSW 2305",
+      "searchText": "new lambton nsw 2305"
+    },
+    {
+      "suburb": "Newcastle",
+      "state": "NSW",
+      "postcode": "2300",
+      "label": "Newcastle, NSW 2300",
+      "searchText": "newcastle nsw 2300"
+    },
+    {
+      "suburb": "Newport",
+      "state": "QLD",
+      "postcode": "4020",
+      "label": "Newport, QLD 4020",
+      "searchText": "newport qld 4020"
+    },
+    {
+      "suburb": "Newtown",
+      "state": "QLD",
+      "postcode": "4305",
+      "label": "Newtown, QLD 4305",
+      "searchText": "newtown qld 4305"
+    },
+    {
+      "suburb": "Nundah",
+      "state": "QLD",
+      "postcode": "4012",
+      "label": "Nundah, QLD 4012",
+      "searchText": "nundah qld 4012"
+    },
+    {
+      "suburb": "Pialba",
+      "state": "QLD",
+      "postcode": "4655",
+      "label": "Pialba, QLD 4655",
+      "searchText": "pialba qld 4655"
+    },
+    {
+      "suburb": "Pimpama",
+      "state": "QLD",
+      "postcode": "4209",
+      "label": "Pimpama, QLD 4209",
+      "searchText": "pimpama qld 4209"
+    },
+    {
+      "suburb": "Redbank",
+      "state": "QLD",
+      "postcode": "4301",
+      "label": "Redbank, QLD 4301",
+      "searchText": "redbank qld 4301"
+    },
+    {
+      "suburb": "Redbank Plains",
+      "state": "QLD",
+      "postcode": "4301",
+      "label": "Redbank Plains, QLD 4301",
+      "searchText": "redbank plains qld 4301"
+    },
+    {
+      "suburb": "Redcliffe",
+      "state": "QLD",
+      "postcode": "4020",
+      "label": "Redcliffe, QLD 4020",
+      "searchText": "redcliffe qld 4020"
+    },
+    {
+      "suburb": "Richlands",
+      "state": "QLD",
+      "postcode": "4077",
+      "label": "Richlands, QLD 4077",
+      "searchText": "richlands qld 4077"
+    },
+    {
+      "suburb": "Ripley",
+      "state": "QLD",
+      "postcode": "4306",
+      "label": "Ripley, QLD 4306",
+      "searchText": "ripley qld 4306"
+    },
+    {
+      "suburb": "Riverbend",
+      "state": "QLD",
+      "postcode": "4280",
+      "label": "Riverbend, QLD 4280",
+      "searchText": "riverbend qld 4280"
+    },
+    {
+      "suburb": "Scarborough",
+      "state": "QLD",
+      "postcode": "4020",
+      "label": "Scarborough, QLD 4020",
+      "searchText": "scarborough qld 4020"
+    },
+    {
+      "suburb": "Southport",
+      "state": "QLD",
+      "postcode": "4215",
+      "label": "Southport, QLD 4215",
+      "searchText": "southport qld 4215"
+    },
+    {
+      "suburb": "Springfield",
+      "state": "QLD",
+      "postcode": "4300",
+      "label": "Springfield, QLD 4300",
+      "searchText": "springfield qld 4300"
+    },
+    {
+      "suburb": "Springfield Central",
+      "state": "QLD",
+      "postcode": "4300",
+      "label": "Springfield Central, QLD 4300",
+      "searchText": "springfield central qld 4300"
+    },
+    {
+      "suburb": "Springwood",
+      "state": "QLD",
+      "postcode": "4127",
+      "label": "Springwood, QLD 4127",
+      "searchText": "springwood qld 4127"
+    },
+    {
+      "suburb": "Sunnybank",
+      "state": "QLD",
+      "postcode": "4109",
+      "label": "Sunnybank, QLD 4109",
+      "searchText": "sunnybank qld 4109"
+    },
+    {
+      "suburb": "Surfers Paradise",
+      "state": "QLD",
+      "postcode": "4217",
+      "label": "Surfers Paradise, QLD 4217",
+      "searchText": "surfers paradise qld 4217"
+    },
+    {
+      "suburb": "Terrigal",
+      "state": "NSW",
+      "postcode": "2260",
+      "label": "Terrigal, NSW 2260",
+      "searchText": "terrigal nsw 2260"
+    },
+    {
+      "suburb": "Toogoom",
+      "state": "QLD",
+      "postcode": "4655",
+      "label": "Toogoom, QLD 4655",
+      "searchText": "toogoom qld 4655"
+    },
+    {
+      "suburb": "Toowoomba",
+      "state": "QLD",
+      "postcode": "4350",
+      "label": "Toowoomba, QLD 4350",
+      "searchText": "toowoomba qld 4350"
+    },
+    {
+      "suburb": "Torquay",
+      "state": "QLD",
+      "postcode": "4655",
+      "label": "Torquay, QLD 4655",
+      "searchText": "torquay qld 4655"
+    },
+    {
+      "suburb": "Urangan",
+      "state": "QLD",
+      "postcode": "4655",
+      "label": "Urangan, QLD 4655",
+      "searchText": "urangan qld 4655"
+    },
+    {
+      "suburb": "Wadalba",
+      "state": "NSW",
+      "postcode": "2259",
+      "label": "Wadalba, NSW 2259",
+      "searchText": "wadalba nsw 2259"
+    },
+    {
+      "suburb": "Wallsend",
+      "state": "NSW",
+      "postcode": "2287",
+      "label": "Wallsend, NSW 2287",
+      "searchText": "wallsend nsw 2287"
+    },
+    {
+      "suburb": "Woodgate",
+      "state": "QLD",
+      "postcode": "4660",
+      "label": "Woodgate, QLD 4660",
+      "searchText": "woodgate qld 4660"
+    },
+    {
+      "suburb": "Woodridge",
+      "state": "QLD",
+      "postcode": "4114",
+      "label": "Woodridge, QLD 4114",
+      "searchText": "woodridge qld 4114"
+    },
+    {
+      "suburb": "Wyong",
+      "state": "NSW",
+      "postcode": "2259",
+      "label": "Wyong, NSW 2259",
+      "searchText": "wyong nsw 2259"
+    }
+  ]
+}

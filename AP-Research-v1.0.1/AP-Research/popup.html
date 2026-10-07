@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AP Research</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="area-search" aria-labelledby="areaSearchTitle">
+      <div class="search-heading">
+        <h1 id="areaSearchTitle">Research an area</h1>
+        <span id="stateChip" class="state-chip">AU</span>
+      </div>
+
+      <form id="areaSearchForm" class="area-search-form" novalidate>
+        <label class="search-field postcode-field">
+          <span>Postcode</span>
+          <input id="postcodeInput" name="postcode" type="text" placeholder="0000" inputmode="numeric" autocomplete="postal-code" maxlength="4" pattern="[0-9]{4}" required>
+        </label>
+        <label class="search-field state-field">
+          <span>State or territory</span>
+          <select id="stateInput" name="state" autocomplete="address-level1" required>
+            <option value="">Select</option>
+            <option value="ACT">ACT</option><option value="NSW">NSW</option>
+            <option value="NT">NT</option><option value="QLD">QLD</option>
+            <option value="SA">SA</option><option value="TAS">TAS</option>
+            <option value="VIC">VIC</option><option value="WA">WA</option>
+          </select>
+        </label>
+        <label class="search-field suburb-field">
+          <span>Suburb</span>
+          <input id="suburbInput" name="suburb" type="text" placeholder="Start typing a suburb" autocomplete="off" spellcheck="false" maxlength="80" role="combobox" aria-autocomplete="list" aria-controls="suburbSuggestions" aria-expanded="false" required>
+          <div id="suburbSuggestions" class="suburb-suggestions" role="listbox" aria-label="Suburb suggestions" hidden></div>
+        </label>
+        <label id="absSalField" class="search-field abs-sal-field hidden">
+          <span>Official ABS locality</span>
+          <select id="absSalInput" name="absSalCode" aria-describedby="absSalHelp"></select>
+          <small id="absSalHelp">Choose the matching 2021 locality.</small>
+        </label>
+        <button id="openAllBtn" class="search-primary" type="submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path><path d="M8 11h6M11 8v6"></path></svg>
+          <span>Open all five sources</span>
+        </button>
+      </form>
+
+      <div class="source-launchers" aria-label="Open one research source">
+        <button type="button" data-search-source="propertyvalue"><strong>PV</strong><span>PropertyValue</span></button>
+        <button type="button" data-search-source="yip"><strong>YIP</strong><span>YIP</span></button>
+        <button type="button" data-search-source="rea"><strong>REA</strong><span>realestate</span></button>
+        <button type="button" data-search-source="sqm"><strong>SQM</strong><span>Vacancy</span></button>
+        <button type="button" data-search-source="abs"><strong>ABS</strong><span>Census</span></button>
+      </div>
+      <div class="suggestion-tools">
+        <p id="searchMessage" class="search-message" role="status" aria-live="polite"></p>
+        <button id="exportSuggestionsBtn" class="export-suggestions" type="button">Export updated JSON</button>
+      </div>
+    </section>
+  </main>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
