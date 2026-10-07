@@ -4,11 +4,12 @@ Keep `Install_AP_Research.bat` beside either `AP-Research-v1.0.1.zip` or the `AP
 
 ## Install
 
-1. Double-click `Install_AP_Research.bat` and select Google Chrome or Brave Browser.
+1. Double-click `Install_AP_Research.bat`. The menu shows profiles found in Chrome and Brave's standard user-data folders. Choose the browser you want.
 2. If prompted, close all windows of that browser and press Enter.
 3. The installer creates `Chrome - AP Research.lnk` or `Brave - AP Research.lnk` on your Desktop and opens the browser Extensions page.
-4. **Chrome:** [Official Chrome versions 137 and later ignore](https://support.google.com/chrome/a/answer/7679408) the shortcut's `--load-extension` argument. In `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select `%LOCALAPPDATA%\AP-Research\Extension`. Chrome remembers the extension in that profile.
-5. **Brave:** Check `brave://extensions/` for AP Research. If it is absent, enable **Developer mode**, click **Load unpacked**, and select the same extension folder.
+4. Check the browser's profile icon to confirm the intended profile is open. The list in the installer is informational; the shortcut does not select a profile.
+5. **Chrome:** [Official Chrome versions 137 and later ignore](https://support.google.com/chrome/a/answer/7679408) the shortcut's `--load-extension` argument. In the intended profile's `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select `%LOCALAPPDATA%\AP-Research\Extension`. Chrome remembers the extension in that profile.
+6. **Brave:** Check `brave://extensions/` in the intended profile for AP Research. If it is absent, enable **Developer mode**, click **Load unpacked**, and select the same extension folder.
 
 Use the generated AP Research browser shortcut for later launches. If the AP Research icon is hidden, click the Extensions/puzzle icon, find **AP Research**, then click its pin icon.
 

@@ -78,6 +78,31 @@ exit /b %AP_EXIT_CODE%
 ::PS   foreach ($root in $roots) { $candidate = Join-Path $root $relative; if (Test-Path -LiteralPath $candidate -PathType Leaf) { return (Full $candidate) } }
 ::PS   return $null
 ::PS }
+::PS function GetProfiles([string]$kind) {
+::PS   $relative = if ($kind -eq 'Chrome') { 'Google\Chrome\User Data' } else { 'BraveSoftware\Brave-Browser\User Data' }
+::PS   $userData = Join-Path $env:LOCALAPPDATA $relative
+::PS   if (-not (Test-Path -LiteralPath $userData -PathType Container)) { return }
+::PS   $names = @{}
+::PS   $localState = Join-Path $userData 'Local State'
+::PS   if (Test-Path -LiteralPath $localState -PathType Leaf) {
+::PS     try { $cache = (Get-Content -LiteralPath $localState -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop).profile.info_cache; if ($cache) { foreach ($entry in $cache.PSObject.Properties) { $names[$entry.Name] = [string]$entry.Value.name } } } catch { }
+::PS   }
+::PS   try { $directories = @(Get-ChildItem -LiteralPath $userData -Directory -Force -ErrorAction Stop | Where-Object { $_.Name -match '^(Default|Profile [0-9]+)$' } | Sort-Object @{ Expression = { if ($_.Name -eq 'Default') { -1 } else { [int]($_.Name -replace '^Profile ', '') } } }) } catch { return }
+::PS   foreach ($directory in $directories) {
+::PS     if (-not (Test-Path -LiteralPath (Join-Path $directory.FullName 'Preferences') -PathType Leaf)) { continue }
+::PS     $display = $names[$directory.Name]
+::PS     if ([string]::IsNullOrWhiteSpace($display)) { $display = $directory.Name }
+::PS     $display = [regex]::Replace($display, '[\x00-\x1f\x7f]', ' ').Trim()
+::PS     if ($display.Length -gt 60) { $display = $display.Substring(0, 57) + '...' }
+::PS     [pscustomobject]@{ Directory = $directory.Name; Display = $display }
+::PS   }
+::PS }
+::PS function ShowProfiles([string]$kind) {
+::PS   $profiles = @(GetProfiles $kind)
+::PS   if ($profiles.Count -eq 0) { Write-Host '  Profiles: none found in the standard user-data folder'; return }
+::PS   Write-Host '  Profiles:'
+::PS   foreach ($profile in $profiles) { Write-Host ('    ' + $profile.Display + ' [' + $profile.Directory + ']') }
+::PS }
 ::PS function ShortcutPath([string]$kind) { if ($kind -eq 'Chrome') { return (Join-Path $desktop 'Chrome - AP Research.lnk') } else { return (Join-Path $desktop 'Brave - AP Research.lnk') } }
 ::PS function ShortcutArgument { return ('--load-extension="' + $extensionDir + '"') }
 ::PS function OwnsShortcut([string]$path, [string]$kind) {
@@ -150,14 +175,16 @@ exit /b %AP_EXIT_CODE%
 ::PS   Write-Host '========================================'
 ::PS   Write-Host ('Extension folder: ' + $extensionDir)
 ::PS   Write-Host ('Desktop shortcut: ' + $shortcut)
+::PS   Write-Host 'Confirm the intended profile from the browser profile icon.'
 ::PS   if ($kind -eq 'Chrome') {
 ::PS     Write-Host 'Current official Chrome versions ignore --load-extension.' -ForegroundColor Yellow
 ::PS     Write-Host 'On chrome://extensions, enable Developer mode, click Load unpacked,'
 ::PS     Write-Host ('and select: ' + $extensionDir)
-::PS     Write-Host 'Chrome will remember this unpacked extension in that profile.'
+::PS     Write-Host 'Do this in the intended Chrome profile; Chrome remembers it there.'
 ::PS   } else {
 ::PS     Write-Host 'Brave was launched with the AP Research load argument.'
 ::PS     Write-Host 'Check brave://extensions to verify that AP Research appears.'
+::PS     Write-Host 'Check within the intended Brave profile.'
 ::PS     Write-Host 'If it does not, enable Developer mode, click Load unpacked,'
 ::PS     Write-Host ('and select: ' + $extensionDir)
 ::PS   }
@@ -193,7 +220,10 @@ exit /b %AP_EXIT_CODE%
 ::PS     Write-Host ''
 ::PS     Write-Host 'Detected browsers:'
 ::PS     Write-Host ('Google Chrome : ' + $chromeStatus)
+::PS     if ($chrome) { ShowProfiles 'Chrome' }
 ::PS     Write-Host ('Brave Browser : ' + $braveStatus)
+::PS     if ($brave) { ShowProfiles 'Brave' }
+::PS     Write-Host 'Profile list is informational; check the profile opened in the browser.'
 ::PS     Write-Host ('-' * 40)
 ::PS     Write-Host '[1] Install / Launch with Google Chrome'
 ::PS     Write-Host '[2] Install / Launch with Brave Browser'

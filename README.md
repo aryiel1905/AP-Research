@@ -6,10 +6,10 @@ AP Research is an unpacked Manifest V3 browser extension for Australian area res
 
 1. On GitHub, select **Code → Download ZIP**, then extract the downloaded repository ZIP.
 2. In the extracted folder, double-click `Install_AP_Research.bat`. Keep it beside the `AP-Research-v1.0.1` folder.
-3. Choose Google Chrome or Brave Browser. Close all windows of the selected browser if prompted.
-4. Follow the installer's browser-specific instructions. The unpacked extension directory is `AP-Research-v1.0.1/AP-Research` in this repository and `%LOCALAPPDATA%\AP-Research\Extension` after installation.
+3. The menu lists profiles found in each browser's standard Windows user-data folder. These names are for reference; choose Google Chrome or Brave Browser, and close all windows of that browser if prompted.
+4. Confirm the intended profile from the browser's profile icon after launch, then follow the browser-specific instructions. The unpacked extension directory is `AP-Research-v1.0.1/AP-Research` in this repository and `%LOCALAPPDATA%\AP-Research\Extension` after installation.
 
-Official Chrome 137 and later [ignore the `--load-extension` launch argument](https://support.google.com/chrome/a/answer/7679408). In Chrome, open `chrome://extensions/`, enable **Developer mode**, select **Load unpacked**, and choose `%LOCALAPPDATA%\AP-Research\Extension`. For Brave, verify that AP Research appears at `brave://extensions/`; use **Load unpacked** there if needed. Use the generated Desktop shortcut on later launches.
+Official Chrome 137 and later [ignore the `--load-extension` launch argument](https://support.google.com/chrome/a/answer/7679408). In the intended Chrome profile, open `chrome://extensions/`, enable **Developer mode**, select **Load unpacked**, and choose `%LOCALAPPDATA%\AP-Research\Extension`. For Brave, verify that AP Research appears at `brave://extensions/` in the intended profile; use **Load unpacked** there if needed. Use the generated Desktop shortcut on later launches. The shortcut does not select a profile; the browser decides which profile opens.
 
 If its toolbar icon is hidden, open the Extensions/puzzle menu and pin **AP Research**.
 
